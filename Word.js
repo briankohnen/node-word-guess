@@ -23,3 +23,4 @@ function Word(theWord) {
     }
 };
 
+module.exports = Word;
