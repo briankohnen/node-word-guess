@@ -3,8 +3,8 @@ function Letter(alpha, bool) {
     this.bool = bool;
     this.display = function() {
         if (this.bool) {
-            console.log(this.alpha);
-        } else console.log("_");
+            return this.alpha;
+        } else return "_";
     };
     this.guessCheck = function(userGuess) {
         if (userGuess.toLowerCase() === this.alpha) {
@@ -13,8 +13,4 @@ function Letter(alpha, bool) {
     };
 };
 
-var a = new Letter("a", false);
-
-a.display();
-a.guessCheck("a");
-a.display();
+module.exports = Letter;

@@ -1,3 +1,5 @@
+var Letter = require("./Letter.js");
+
 function Word(theWord) {
     this.theWord = theWord;
     this.letters = [];
@@ -12,27 +14,12 @@ function Word(theWord) {
         for (var j = 0; j < this.letters.length; j++) {
             displayDaWord.push(this.letters[j].display());
         }
-        return displayDaWord.join("");
+        return displayDaWord.join(" ");
+    }
+    this.checkGuess = function(userGuess) {
+        for (var i = 0; i < this.letters.length; i++) {
+            this.letters[i].guessCheck(userGuess);
+        }
     }
 };
 
-function Letter(alpha, bool) {
-    this.alpha = alpha;
-    this.bool = bool;
-    this.display = function() {
-        if (this.bool) {
-            return this.alpha;
-        } else return "_ ";
-    };
-    this.guessCheck = function(userGuess) {
-        if (userGuess.toLowerCase() === this.alpha) {
-            this.bool = true;
-        }
-    };
-};
-
-var apples = new Word("apples");
-
-apples.letterify();
-
-console.log(apples.toString());
