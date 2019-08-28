@@ -10,6 +10,16 @@ let fruitsWords = ["strawberry", "grape", "kiwi", "apple", "starfruit",
 
 let wins = 0;
 
+var schema = {
+    properties: {
+      Guess: {
+        pattern: /^[a-zA-Z]$/,
+        message: 'Guess can only be one letter, A-Z',
+        required: true
+      }
+    }
+  };
+
 console.log("\nCAN YOU GUESS THE FRUITS?????"
             + "\n=============================");
 
@@ -53,7 +63,7 @@ const newWord = function() {
             
             prompt.start();
 
-            prompt.get(["Guess"], function (err, result) {
+            prompt.get(schema, function (err, result) {
 
                 if (!allGuesses.includes(result.Guess)) {
                 
