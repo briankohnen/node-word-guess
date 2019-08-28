@@ -10,45 +10,67 @@ let fruitsWords = ["strawberry", "grape", "kiwi", "apple", "starfruit",
 
 let wins = 0;
 
-function newWord() {
+console.log("\nCAN YOU GUESS THE FRUITS?????"
+            + "\n=============================");
 
-    console.log("YOUR WINS : " + wins);
+const newWord = function() {
 
-    let randomFroot = new Word(fruitsWords[Math.ceil((Math.random() * fruitsWords.length))]);
+    console.log("YOUR WINS : " + wins +
+                "\n=============================");
 
     let guessesLeft = 10;
 
+    let readLetters = [];
+
+    let allGuesses = [];
+
+    let randomFroot = new Word(fruitsWords[Math.ceil((Math.random() * fruitsWords.length))]);
+
     randomFroot.letterify();
+
+    randomFroot.letters.forEach(function(lett) {
+        readLetters.push(lett.alpha);
+    });
 
     console.log(randomFroot.toString());
 
     function askForGuess() {
 
-        console.log("GUESSES LEFT : " + guessesLeft);
+        console.log(
+            "\nGUESSES LEFT : " + guessesLeft +
+            "\n============================="
+            );
 
         if (guessesLeft === 0) {
-
             throw console.log("Sorry, you lost");
-
         }
 
         if (!randomFroot.toString().includes("_")) {
-
             wins++;
             newWord();
-
+            
         } else {
             
             prompt.start();
 
             prompt.get(["Guess"], function (err, result) {
-                
-                randomFroot.checkGuess(result.Guess);
 
-                console.log(randomFroot.toString());
+                if (!allGuesses.includes(result.Guess)) {
+                
+                    randomFroot.checkGuess(result.Guess);
+
+                    allGuesses.push(result.Guess);
+
+                    console.log(randomFroot.toString());
+
+                    if (!readLetters.includes(result.Guess)) {
+                        guessesLeft--;
+                    }
+                } else {
+                    console.log("\nRepeat guess, guess again!");
+                }
 
                 askForGuess();
-
 
             });
 
@@ -56,7 +78,9 @@ function newWord() {
     }
 
     askForGuess();
+
 };
+
 
 newWord();
 

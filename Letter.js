@@ -9,7 +9,8 @@ function Letter(alpha, bool) {
     this.guessCheck = function(userGuess) {
         if (userGuess.toLowerCase() === this.alpha) {
             this.bool = true;
-        }
+            return true;
+        } else return false;
     };
 };
 
